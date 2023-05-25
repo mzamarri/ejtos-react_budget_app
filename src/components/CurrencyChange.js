@@ -2,27 +2,30 @@ import React, {useContext} from 'react';
 import {AppContext} from '../context/AppContext';
 
 const CurrencyChange = () => {
-    const {currency} = useContext(AppContext);
+    const {dispatch} = useContext(AppContext);
 
-    function currencyEventHandler() {
-
+    function currencyEventHandler(val) {
+        dispatch({
+            type: 'CHG_CURRENCY',
+            payload: val
+        })
     }
 
     return (
-        <div className='alert alert-secondary'>
-            <label className="input-group-text">
+            <label className="input-group-text" style={{backgroundColor: "lightgreen"}}>
                 Currency (
                 <select
                     className="custom-select"
+                    onChange={(event) => currencyEventHandler(event.target.value)}
+                    style={{backgroundColor: "lightgreen"}}
                 >
-                    <option defaultValue value="£" name="pound">£ Pound</option>
-                    <option value="$" name="dollar">$ Dollar</option>
-                    <option value="€" name="euro">€ Euro</option>
-                    <option value="₹" name="rupee">₹ Rupee</option>
+                    <option defaultValue style={{color: "black"}} value="£" name="pound">£ Pound</option>
+                    <option style={{color: "black"}} value="$" name="dollar">$ Dollar</option>
+                    <option style={{color: "black"}} value="€" name="euro">€ Euro</option>
+                    <option style={{color: "black"}} value="₹" name="rupee">₹ Rupee</option>
                 </select>
                 )
             </label>
-        </div>
     )
 }
 
